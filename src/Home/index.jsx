@@ -12,7 +12,10 @@ export function Home(){
                     <input type="text" name="" placeholder="Adicione uma nova tarefa" id="" />
                     <button type="submit">Criar <PlusCircle size={20}/></button>
                 </form>
-
+                <div className={style.taskStatusTitle}>
+                    <p>Tarefas criadas <span>5</span></p>
+                    <p>Concluída <span>0 de 5</span></p>
+                </div>
                 <TaskList/>
                 <TaskList/>
                 <TaskList/>
