@@ -1,4 +1,5 @@
 import { Header } from "../Components/Header"
+import { TaskList } from "../Components/TaskList"
 import { PlusCircle } from "phosphor-react"
 import style from './index.module.css'
 
@@ -11,6 +12,10 @@ export function Home(){
                     <input type="text" name="" placeholder="Adicione uma nova tarefa" id="" />
                     <button type="submit">Criar <PlusCircle size={20}/></button>
                 </form>
+
+                <TaskList/>
+                <TaskList/>
+                <TaskList/>
             </section>
         </div>
     )

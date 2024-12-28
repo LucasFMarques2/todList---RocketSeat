@@ -10,6 +10,7 @@
   --gray-600: #1A1A1A;
   --gray-700: #0D0D0D;
 
+  --blue-100: #4ea7de2f;
   --blue-200: #4EA8DE;
   --blue-400: #1E6F9F;
 
@@ -31,7 +32,7 @@
 }
 
 body{
-  background-color: var(--gray-400);
+  background-color: var(--gray-600);
   -webkit-font-smoothing: antialiased;
   color: var(--gray-200);
 }
