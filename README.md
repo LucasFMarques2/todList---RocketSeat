@@ -1,8 +1,26 @@
-# React + Vite
+# Todo List RocktSeat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##Linguagem: 
+ - Javascript
 
-Currently, two official plugins are available:
+##Biblioteca + Ferramentas
+ - React
+ - Vite
+ - phosphor-react
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##Layout
+ [Figman do layouy](https://www.figma.com/design/BXNats0V5ZEJwkbLY1xl0x/ToDo-List-%E2%80%A2-Desafio-React-(Copy)?node-id=0-1&p=f&t=8FMtlCYKGh5NWrha-0)
+
+#Descrição
+
+ Porjeto do primeiro desafio do modulo React da Rocketseat para fixar os conceitos de:
+  - Estados
+  - Imutabilidade do estado
+  - Listas e chaves no ReactJs
+  - Propriedades
+  - Componentização
+  - Map
+  - Filter
+  - Reduce
+
+ 
