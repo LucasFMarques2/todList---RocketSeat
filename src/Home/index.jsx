@@ -18,7 +18,7 @@ export function Home(){
                 </div>
                 <TaskList/>
                 <TaskList/>
-                <TaskList/>
+                <TaskList concluido/>
             </section>
         </div>
     )
