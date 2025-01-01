@@ -110,5 +110,12 @@
     .taskStatusTitle{
         font-size: 1.2rem;
     }
+
+    .taskListArea > p{
+        font-size: 1.4rem;
+    }
+    .taskListArea > span{
+        font-size: 1.2rem;
+    }
     
 }
