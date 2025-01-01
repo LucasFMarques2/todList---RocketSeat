@@ -2,24 +2,65 @@ import { Header } from "../Components/Header"
 import { TaskList } from "../Components/TaskList"
 import { PlusCircle } from "phosphor-react"
 import style from './index.module.css'
+import { useState } from "react"
 
-export function Home(){
-    return(
+
+export function Home() {
+    const [tasks, setTasks] = useState([]);
+    const [newTaskText, setNewTaskText] = useState('');
+
+    function handleCreateNewTask(event) {
+        event.preventDefault();
+        const newTask = { text: newTaskText, checked: false }; 
+        setTasks([...tasks, newTask]);
+        setNewTaskText('');
+    }
+
+    function handleNewTaskChange(event) {
+        setNewTaskText(event.target.value);
+    }
+
+    function handleCheckedTask(index) {
+        const updatedTasks = tasks.map((task, i) => 
+            i === index ? { ...task, checked: !task.checked } : task
+        );
+        setTasks(updatedTasks);
+    }
+
+    function deleteTask(taskToDelet){
+        const taskListWhitoutTaskToDelete = tasks.filter(task => task.text !== taskToDelet);
+        setTasks(taskListWhitoutTaskToDelete);
+    }
+
+    return (
         <div className={style.home}>
-            <Header/>
+            <Header />
             <section className={style.tasksArea}>
-                <form >
-                    <input type="text" name="" placeholder="Adicione uma nova tarefa" id="" />
-                    <button type="submit">Criar <PlusCircle size={20}/></button>
+                <form onSubmit={handleCreateNewTask}>
+                    <input
+                        type="text"
+                        name="newTask"
+                        placeholder="Adicione uma nova tarefa"
+                        value={newTaskText}
+                        onChange={handleNewTaskChange}
+                        required
+                    />
+                    <button type="submit">Criar <PlusCircle size={20} /></button>
                 </form>
                 <div className={style.taskStatusTitle}>
-                    <p>Tarefas criadas <span>5</span></p>
-                    <p>Concluída <span>0 de 5</span></p>
+                    <p>Tarefas criadas <span>{tasks.length}</span></p>
+                    <p>Concluídas <span>{tasks.filter(task => task.checked).length} de {tasks.length}</span></p>
                 </div>
-                <TaskList/>
-                <TaskList/>
-                <TaskList concluido/>
+                {tasks.map((task, index) => (
+                    <TaskList
+                        key={index}
+                        task={task.text}
+                        check={task.checked}
+                        onToggleCheck={() => handleCheckedTask(index)}
+                        onDeleteTask={deleteTask}
+                    />
+                ))}
             </section>
         </div>
-    )
+    );
 }
