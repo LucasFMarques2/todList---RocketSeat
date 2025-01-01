@@ -1,6 +1,7 @@
 import { Header } from "../Components/Header"
 import { TaskList } from "../Components/TaskList"
 import { PlusCircle } from "phosphor-react"
+import defaultIcon from '../assets/defaultIcon.svg'
 import style from './index.module.css'
 import { useState } from "react"
 
@@ -51,15 +52,23 @@ export function Home() {
                     <p>Tarefas criadas <span>{tasks.length}</span></p>
                     <p>Concluídas <span>{tasks.filter(task => task.checked).length} de {tasks.length}</span></p>
                 </div>
-                {tasks.map((task, index) => (
+                <div className={tasks.length === 0 ? style.taskListArea : style}>
+                   {tasks.length === 0 ? (
+                    <>
+                     <img src={defaultIcon} alt="Icone de agenda vazia" />
+                     <p>Você ainda não tem tarefas cadastradas</p>
+                     <span>Crie tarefas e organize seus itens a fazer</span>
+                    </>
+                   ) : (tasks.map((task, index) => (
                     <TaskList
                         key={index}
                         task={task.text}
                         check={task.checked}
-                        onToggleCheck={() => handleCheckedTask(index)}
+                        onToggleCheck={() => handleCheckedTask(index)} 
                         onDeleteTask={deleteTask}
                     />
-                ))}
+                )))}
+                </div>
             </section>
         </div>
     );
