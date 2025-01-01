@@ -23,4 +23,12 @@
   - Filter
   - Reduce
 
+##Instalar na máquina Local
+
+-Instale o NodeJs
+-faça o clone do repositório na sua maquina local
+-Abra o projeto na sua ideai de escolha
+- Rode o comando "Npm install"
+- rode o comando "npm run dev"
+
  
