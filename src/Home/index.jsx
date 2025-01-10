@@ -3,17 +3,44 @@ import { TaskList } from "../Components/TaskList"
 import { PlusCircle } from "phosphor-react"
 import defaultIcon from '../assets/defaultIcon.svg'
 import style from './index.module.css'
-import { useState } from "react"
+import { useReducer, useState } from "react"
 
 
 export function Home() {
-    const [tasks, setTasks] = useState([]);
+    const [tasks, dispatch] = useReducer(tasksReducer, [])
     const [newTaskText, setNewTaskText] = useState('');
+
+    function tasksReducer(tasks, action){
+        switch (action.type){
+            case 'created_new_task':{
+                return [...tasks, {
+                    id: Date.now(),
+                    text: action.text,
+                    checked: false
+                }]
+            }
+            case 'toggle_task' :{
+                return tasks.map((task) => 
+                    task.id === action.id ? {...task, checked: !task.checked} : task
+                )
+            }
+            case 'deleted_task':{
+                return tasks.filter((task) => task.id !== action.id)
+            }
+            default: {
+                console.error(`Ação desconhecida: ${action.type}`);
+                return tasks;
+            }
+            
+        }
+    }
 
     function handleCreateNewTask(event) {
         event.preventDefault();
-        const newTask = { text: newTaskText, checked: false }; 
-        setTasks([...tasks, newTask]);
+        dispatch({
+            type: 'created_new_task',
+            text: newTaskText
+        })
         setNewTaskText('');
     }
 
@@ -21,16 +48,18 @@ export function Home() {
         setNewTaskText(event.target.value);
     }
 
-    function handleCheckedTask(index) {
-        const updatedTasks = tasks.map((task, i) => 
-            i === index ? { ...task, checked: !task.checked } : task
-        );
-        setTasks(updatedTasks);
+    function handleCheckedTask(id) {
+        dispatch({
+            type: 'toggle_task',
+            id: id,
+        });
     }
 
-    function deleteTask(taskToDelet){
-        const taskListWhitoutTaskToDelete = tasks.filter(task => task.text !== taskToDelet);
-        setTasks(taskListWhitoutTaskToDelete);
+    function deleteTask(id){
+        dispatch({
+            type: 'deleted_task',
+            id: id
+        })
     }
 
     return (
@@ -59,13 +88,13 @@ export function Home() {
                      <p>Você ainda não tem tarefas cadastradas</p>
                      <span>Crie tarefas e organize seus itens a fazer</span>
                     </>
-                   ) : (tasks.map((task, index) => (
+                   ) : (tasks.map((task) => (
                     <TaskList
-                        key={index}
+                        key={task.id}
                         task={task.text}
                         check={task.checked}
-                        onToggleCheck={() => handleCheckedTask(index)} 
-                        onDeleteTask={deleteTask}
+                        onToggleCheck={() => handleCheckedTask(task.id)} 
+                        onDeleteTask={() => deleteTask(task.id)}
                     />
                 )))}
                 </div>
